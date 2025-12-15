@@ -41,7 +41,12 @@ describe('SummaryPanel', () => {
     expect(screen.getByText('First comment')).toBeInTheDocument()
     
     // Check names are displayed
-    expisplays feedback logs even when comments are empty', () => {
+    expect(screen.getByText('John')).toBeInTheDocument()
+    expect(screen.getByText('Jane')).toBeInTheDocument()
+    expect(screen.getByText('Bob')).toBeInTheDocument()
+  })
+
+  it('displays feedback logs even when comments are empty', () => {
     const submissions = [
       { id: 1, name: 'Alice', rating: 4, comment: '', timestamp: new Date().toISOString() },
       { id: 2, name: 'Bob', rating: 5, comment: '  ', timestamp: new Date().toISOString() },
@@ -52,23 +57,17 @@ describe('SummaryPanel', () => {
     // Should show All Feedback section
     expect(screen.getByText('All Feedback')).toBeInTheDocument()
     expect(screen.getByText('Alice')).toBeInTheDocument()
-    expect(screen.getByText('Bob')) Date().toISOString() },
-      { id: 2, rating: 5, comment: '  ', timestamp: new Date().toISOString() },
-    ]
-    
-    render(<SummaryPanel submissions={submissions} />)
-    
-    expect(screname and rating with each feedback log', () => {
+    expect(screen.getByText('Bob')).toBeInTheDocument()
+  })
+
+  it('displays name and rating with each feedback log', () => {
     const submissions = [
       { id: 1, name: 'Sarah', rating: 5, comment: 'Excellent service', timestamp: new Date().toISOString() },
     ]
     
     render(<SummaryPanel submissions={submissions} />)
     
-    expect(screen.getByText('Sarah')).toBeInTheDocument()]
-    
-    render(<SummaryPanel submissions={submissions} />)
-    
+    expect(screen.getByText('Sarah')).toBeInTheDocument()
     expect(screen.getByText('Rating: 5')).toBeInTheDocument()
     expect(screen.getByText('Excellent service')).toBeInTheDocument()
   })

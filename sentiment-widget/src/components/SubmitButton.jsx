@@ -1,3 +1,4 @@
+// SubmitButton component - form submission button with dynamic text
 import React from 'react'
 
 function SubmitButton({ onClick, disabled }) {
@@ -6,8 +7,9 @@ function SubmitButton({ onClick, disabled }) {
       type="submit"
       className="submit-button"
       onClick={onClick}
-      disabled={disabled}
+      disabled={disabled} // Disable button during form submission
     >
+      {/* Change button text to 'Submitting...' when disabled */}
       {disabled ? 'Submitting...' : 'Submit Feedback'}
     </button>
   )

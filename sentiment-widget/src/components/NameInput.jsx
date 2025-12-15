@@ -1,3 +1,4 @@
+// NameInput component - optional text input for user's name
 import React from 'react'
 
 function NameInput({ name, onNameChange, disabled }) {
@@ -11,10 +12,10 @@ function NameInput({ name, onNameChange, disabled }) {
         id="name-input"
         className="name-field"
         value={name}
-        onChange={(e) => onNameChange(e.target.value)}
-        disabled={disabled}
+        onChange={(e) => onNameChange(e.target.value)} // Update parent state on input change
+        disabled={disabled} // Disable during form submission
         placeholder="Enter your name..."
-        aria-label="Your name (optional)"
+        aria-label="Your name (optional)" // Accessibility label
       />
     </div>
   )
