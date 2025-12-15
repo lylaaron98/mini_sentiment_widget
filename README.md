@@ -193,4 +193,4 @@ MIT
 
 ## Author
 
-Built with ❤️ using React and Vite
+Built using React and Vite
