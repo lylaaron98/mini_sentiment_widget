@@ -78,56 +78,60 @@ function App() {
         </header>
 
         <div className="content">
-          {/* Left side: Feedback submission form */}
-          <div className="feedback-form">
-            <h2>Submit Your Feedback</h2>
-            
-            {/* Success confirmation message (shown for 3 seconds after submission) */}
-            {showConfirmation && (
-              <div className="confirmation-message" role="alert">
-                ✓ Thank you for your feedback!
-              </div>
-            )}
+          {/* Left side: Feedback submission form - independent container */}
+          <div className="feedback-form-container">
+            <div className="feedback-form">
+              <h2>Submit Your Feedback</h2>
+              
+              {/* Success confirmation message (shown for 3 seconds after submission) */}
+              {showConfirmation && (
+                <div className="confirmation-message" role="alert">
+                  ✓ Thank you for your feedback!
+                </div>
+              )}
 
-            {/* Validation error message (shown when rating is not selected) */}
-            {validationError && (
-              <div className="validation-error" role="alert">
-                {validationError}
-              </div>
-            )}
+              {/* Validation error message (shown when rating is not selected) */}
+              {validationError && (
+                <div className="validation-error" role="alert">
+                  {validationError}
+                </div>
+              )}
 
-            <form onSubmit={handleSubmit}>
-              {/* Name input field (optional) */}
-              <NameInput
-                name={name}
-                onNameChange={setName}
-                disabled={isSubmitting}
-              />
+              <form onSubmit={handleSubmit}>
+                {/* Name input field (optional) */}
+                <NameInput
+                  name={name}
+                  onNameChange={setName}
+                  disabled={isSubmitting}
+                />
 
-              {/* Rating selection chips (1-5) */}
-              <RatingChips
-                selectedRating={selectedRating}
-                onRatingChange={setSelectedRating}
-                disabled={isSubmitting}
-              />
+                {/* Rating selection chips (1-5) */}
+                <RatingChips
+                  selectedRating={selectedRating}
+                  onRatingChange={setSelectedRating}
+                  disabled={isSubmitting}
+                />
 
-              {/* Comment textarea */}
-              <CommentBox
-                comment={comment}
-                onCommentChange={setComment}
-                disabled={isSubmitting}
-              />
+                {/* Comment textarea */}
+                <CommentBox
+                  comment={comment}
+                  onCommentChange={setComment}
+                  disabled={isSubmitting}
+                />
 
-              {/* Submit button */}
-              <SubmitButton
-                onClick={handleSubmit}
-                disabled={isSubmitting}
-              />
-            </form>
+                {/* Submit button */}
+                <SubmitButton
+                  onClick={handleSubmit}
+                  disabled={isSubmitting}
+                />
+              </form>
+            </div>
           </div>
 
-          {/* Right side: Summary statistics and feedback logs */}
-          <SummaryPanel submissions={submissions} />
+          {/* Right side: Summary statistics and feedback logs - independent container */}
+          <div className="summary-container">
+            <SummaryPanel submissions={submissions} />
+          </div>
         </div>
       </div>
     </div>
