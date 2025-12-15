@@ -193,4 +193,4 @@ MIT
 
 ## Author
 
-Built using React and Vite
+Built using React and Vite by Aaron Lee
