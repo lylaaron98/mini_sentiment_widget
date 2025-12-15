@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:e2e": "playwright test"
+    "test:log": "vitest run > TEST_RESULTS.log"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

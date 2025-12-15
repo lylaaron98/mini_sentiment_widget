@@ -6,27 +6,29 @@ A React-based sentiment feedback widget that allows users to submit ratings and 
 
 ### Core Functionality
 - **Rating System**: Five rating chips (1-5) with visual selection feedback
+- **Optional Name Input**: Users can provide their name (displays as "Anonymous" if not provided)
 - **Comment Input**: Textarea for entering detailed feedback
 - **Form Validation**: Ensures a rating is selected before submission
 - **Spam Prevention**: 3-second form disable period after submission
 - **Summary Panel**:
   - Total number of submissions
-  - Average rating calculation
-  - Three most recent comments with timestamps
+  - Average rating calculation (2 decimal places)
+  - All feedback logs in reverse chronological order
 
 ### Enhancements
-- **Light/Dark Mode**: Toggle between themes with persistent visual feedback
+- **Light/Dark Mode**: Toggle between themes with Material-UI icons
 - **Responsive Design**: Mobile-friendly layout
 - **Accessibility**: ARIA labels and semantic HTML
-- **Comprehensive Testing**: Unit tests and E2E tests included
+- **Comprehensive Testing**: 30 unit tests with Vitest (100% pass rate)
+- **Test Logging**: Automatic test result logging to TEST_RESULTS.log
 
 ## Tech Stack
 
-- **React 18** - UI library with functional components and hooks
-- **Vite** - Build tool and dev server
-- **Vitest** - Unit testing framework
-- **Testing Library** - React component testing utilities
-- **Playwright** - End-to-end testing
+- **React 18.3.1** - UI library with functional components and hooks
+- **Vite 5.0.8** - Fast build tool and development server
+- **Vitest 1.6.1** - Unit testing framework
+- **Testing Library** - React component testing utilities (@testing-library/react 14.1.2)
+- **Material-UI Icons** - Icon components for theme toggle (LightMode/DarkMode)
 - **CSS3** - Styling with CSS custom properties for theming
 
 ## Project Structure
@@ -35,27 +37,29 @@ A React-based sentiment feedback widget that allows users to submit ratings and 
 sentiment-widget/
 ├── src/
 │   ├── components/
-│   │   ├── RatingChips.jsx      # Rating selection component
+│   │   ├── RatingChips.jsx      # Rating selection component (1-5)
+│   │   ├── NameInput.jsx        # Optional name input field
 │   │   ├── CommentBox.jsx       # Comment textarea component
 │   │   ├── SubmitButton.jsx     # Submit button component
-│   │   └── SummaryPanel.jsx     # Statistics and recent comments
+│   │   └── SummaryPanel.jsx     # Statistics and all feedback logs
 │   ├── tests/
 │   │   ├── setup.js             # Test configuration
-│   │   ├── RatingChips.test.jsx # RatingChips unit tests
-│   │   ├── CommentBox.test.jsx  # CommentBox unit tests
-│   │   ├── SubmitButton.test.jsx# SubmitButton unit tests
-│   │   ├── SummaryPanel.test.jsx# SummaryPanel unit tests
-│   │   └── App.test.jsx         # Integration tests
+│   │   ├── RatingChips.test.jsx # RatingChips unit tests (5 tests)
+│   │   ├── NameInput.test.jsx   # NameInput unit tests (5 tests)
+│   │   ├── CommentBox.test.jsx  # CommentBox unit tests (4 tests)
+│   │   ├── SubmitButton.test.jsx# SubmitButton unit tests (4 tests)
+│   │   ├── SummaryPanel.test.jsx# SummaryPanel unit tests (5 tests)
+│   │   └── App.test.jsx         # Integration tests (7 tests)
 │   ├── App.jsx                  # Main application component
 │   ├── main.jsx                 # React entry point
 │   └── index.css                # Global styles and theme variables
-├── e2e/
-│   └── sentiment-widget.spec.js # E2E tests
 ├── index.html                   # HTML entry point
 ├── package.json                 # Dependencies and scripts
 ├── vite.config.js               # Vite configuration
 ├── vitest.config.js             # Vitest configuration
-└── playwright.config.js         # Playwright configuration
+├── TEST_RESULTS.log             # Test execution log (auto-generated)
+├── DEVELOPMENT.md               # Comprehensive development documentation
+└── README.md                    # This file
 ```
 
 ## Getting Started
@@ -65,9 +69,10 @@ sentiment-widget/
 
 ### Installation
 
-1. Clone the repository or navigate to the project directory:
+1. Clone the repository:
 ```bash
-cd sentiment-widget
+git clone <repository-url>
+cd mini_sentiment_widget/sentiment-widget
 ```
 
 2. Install dependencies:
@@ -75,17 +80,33 @@ cd sentiment-widget
 npm install
 ```
 
-### Development
+### Available Scripts
 
+#### Development
 Start the development server:
 ```bash
 npm run dev
 ```
+The application will be available at `http://localhost:5173` with hot module replacement (HMR) enabled.
 
-The application will be available at `http://localhost:5173`
+#### Testing
+Run all unit tests:
+```bash
+npm run test
+```
 
-### Building for Production
+Run tests and save output to TEST_RESULTS.log:
+```bash
+npm run test:log
+```
 
+Run tests with UI:
+```bash
+npm run test:ui
+```
+
+#### Production
+Build for production:
 ```bash
 npm run build
 ```
@@ -97,16 +118,23 @@ npm run preview
 
 ## Testing
 
-### Unit Tests
+The project includes comprehensive unit tests using Vitest and Testing Library.
 
-Run all unit tests:
+### Test Suite Overview
+- **Total Tests**: 30 tests across 6 test files
+- **Test Framework**: Vitest 1.6.1
+- **Pass Rate**: 100% (30/30 passing)
+
+### Running Tests
+
+Run all tests:
 ```bash
-npm test
+npm run test
 ```
 
-Run tests in watch mode:
+Run tests and save output to log file:
 ```bash
-npm test -- --watch
+npm run test:log
 ```
 
 Run tests with UI:
@@ -114,34 +142,23 @@ Run tests with UI:
 npm run test:ui
 ```
 
-### End-to-End Tests
+### Test Coverage
+- **App.test.jsx** (7 tests): Integration tests for main App component
+- **RatingChips.test.jsx** (5 tests): Rating selection functionality
+- **NameInput.test.jsx** (5 tests): Name input field functionality
+- **CommentBox.test.jsx** (4 tests): Comment textarea functionality
+- **SubmitButton.test.jsx** (4 tests): Submit button behavior
+- **SummaryPanel.test.jsx** (5 tests): Statistics and feedback log display
 
-Install Playwright browsers (first time only):
-```bash
-npx playwright install
-```
-
-Run E2E tests:
-```bash
-npm run test:e2e
-```
-
-Run E2E tests in headed mode:
-```bash
-npx playwright test --headed
-```
-
-Run E2E tests in UI mode:
-```bash
-npx playwright test --ui
-```
+For detailed test results, see `TEST_RESULTS.log` after running `npm run test:log`.
 
 ## Usage
 
-1. **Select a Rating**: Click on one of the five rating chips (1-5)
-2. **Enter a Comment** (optional): Type your feedback in the textarea
-3. **Submit**: Click the "Submit Feedback" button
-4. **View Results**: See your submission reflected in the Summary Panel
+1. **Enter Your Name** (optional): Type your name in the input field (displays as "Anonymous" if not provided)
+2. **Select a Rating**: Click on one of the five rating chips (1-5) - **Required**
+3. **Enter a Comment** (optional): Type your feedback in the textarea
+4. **Submit**: Click the "Submit Feedback" button
+5. **View Results**: See your submission reflected in the Summary Panel with real-time statistics
 
 ### Features in Action
 
@@ -154,8 +171,14 @@ npx playwright test --ui
 
 ### RatingChips
 - Props: `selectedRating`, `onRatingChange`, `disabled`
-- Displays 5 clickable rating buttons
+- Displays 5 clickable rating buttons (1-5)
 - Highlights selected rating with visual feedback
+- ARIA labels for accessibility
+
+### NameInput
+- Props: `name`, `onNameChange`, `disabled`
+- Optional text input for user's name
+- Displays "Anonymous" in submissions if not provided
 
 ### CommentBox
 - Props: `comment`, `onCommentChange`, `disabled`
@@ -165,21 +188,25 @@ npx playwright test --ui
 ### SubmitButton
 - Props: `onClick`, `disabled`
 - Changes text when disabled ("Submitting...")
-- Prevents multiple submissions
+- Prevents multiple submissions during 3-second timeout
 
 ### SummaryPanel
 - Props: `submissions`
-- Calculates and displays statistics
-- Shows up to 3 most recent comments in reverse chronological order
-- Filters out empty comments
+- Calculates and displays real-time statistics:
+  - Total submissions count
+  - Average rating (2 decimal places)
+- Shows all feedback logs in reverse chronological order
+- Displays name, rating, comment, and formatted timestamp for each submission
 
 ## Design Decisions
 
 1. **State Management**: Used React's built-in useState for simplicity (no external state management needed)
-2. **Component Structure**: Separated concerns into logical, reusable components
+2. **Component Structure**: Separated concerns into logical, reusable components (6 components total)
 3. **Accessibility**: Added ARIA labels and semantic HTML for screen reader support
-4. **Testing**: Comprehensive unit and E2E tests ensure functionality and prevent regressions
+4. **Testing**: 30 comprehensive unit tests with Vitest ensure functionality and prevent regressions
 5. **Styling**: CSS custom properties for easy theme switching without JavaScript overhead
+6. **Test Logging**: Automated test result logging for documentation and CI/CD integration
+7. **Code Documentation**: Inline comments throughout all source files for maintainability
 
 ## Browser Support
 
