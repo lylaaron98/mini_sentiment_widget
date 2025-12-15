@@ -4,16 +4,15 @@ applications:
       phases:
         preBuild:
           commands:
-            - cd sentiment-widget
             - npm ci
         build:
           commands:
             - npm run build
       artifacts:
-        baseDirectory: sentiment-widget/dist
+        baseDirectory: dist
         files:
           - '**/*'
       cache:
         paths:
-          - sentiment-widget/node_modules/**/*
+          - node_modules/**/*
     appRoot: sentiment-widget
