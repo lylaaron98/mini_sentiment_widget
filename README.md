@@ -32,6 +32,7 @@ A React-based sentiment feedback widget that allows users to submit ratings and 
 - **Testing Library** - React component testing utilities (@testing-library/react 14.1.2)
 - **Material-UI Icons** - Icon components for theme toggle (LightMode/DarkMode)
 - **CSS3** - Styling with CSS custom properties for theming
+- **AWS Amplify** - Deployment and hosting platform
 
 ## Project Structure
 
@@ -46,22 +47,23 @@ sentiment-widget/
 │   │   └── SummaryPanel.jsx     # Statistics and all feedback logs
 │   ├── tests/
 │   │   ├── setup.js             # Test configuration
-│   │   ├── RatingChips.test.jsx # RatingChips unit tests (5 tests)
-│   │   ├── NameInput.test.jsx   # NameInput unit tests (5 tests)
+│   │   ├── App.test.jsx         # Integration tests (7 tests)
 │   │   ├── CommentBox.test.jsx  # CommentBox unit tests (4 tests)
+│   │   ├── NameInput.test.jsx   # NameInput unit tests (5 tests)
+│   │   ├── RatingChips.test.jsx # RatingChips unit tests (5 tests)
 │   │   ├── SubmitButton.test.jsx# SubmitButton unit tests (4 tests)
-│   │   ├── SummaryPanel.test.jsx# SummaryPanel unit tests (5 tests)
-│   │   └── App.test.jsx         # Integration tests (7 tests)
+│   │   └── SummaryPanel.test.jsx# SummaryPanel unit tests (5 tests)
 │   ├── App.jsx                  # Main application component
-│   ├── main.jsx                 # React entry point
-│   └── index.css                # Global styles and theme variables
+│   ├── index.css                # Global styles and theme variables
+│   └── main.jsx                 # React entry point
+├── .gitignore                   # Git ignore rules
+├── amplify.yml                  # AWS Amplify build configuration
+├── DEVELOPMENT.md               # Comprehensive development documentation
 ├── index.html                   # HTML entry point
 ├── package.json                 # Dependencies and scripts
-├── vite.config.js               # Vite configuration
-├── vitest.config.js             # Vitest configuration
 ├── TEST_RESULTS.log             # Test execution log (auto-generated)
-├── DEVELOPMENT.md               # Comprehensive development documentation
-└── README.md                    # This file
+├── vite.config.js               # Vite configuration
+└── vitest.config.js             # Vitest configuration
 ```
 
 ## Getting Started
@@ -203,12 +205,13 @@ For detailed test results, see `TEST_RESULTS.log` after running `npm run test:lo
 ## Design Decisions
 
 1. **State Management**: Used React's built-in useState for simplicity (no external state management needed)
-2. **Component Structure**: Separated concerns into logical, reusable components (6 components total)
+2. **Component Structure**: Separated concerns into logical, reusable components (5 components + 1 main App component)
 3. **Accessibility**: Added ARIA labels and semantic HTML for screen reader support
 4. **Testing**: 30 comprehensive unit tests with Vitest ensure functionality and prevent regressions
 5. **Styling**: CSS custom properties for easy theme switching without JavaScript overhead
 6. **Test Logging**: Automated test result logging for documentation and CI/CD integration
 7. **Code Documentation**: Inline comments throughout all source files for maintainability
+8. **Deployment**: AWS Amplify for seamless CI/CD and hosting with automatic builds on push
 
 ## Browser Support
 
