@@ -2,6 +2,8 @@
 
 A React-based sentiment feedback widget that allows users to submit ratings and comments. Features include real-time statistics, recent comments display, and light/dark mode theming.
 
+**🚀 Live Demo**: [https://main.d1saof37xl3c4g.amplifyapp.com/](https://main.d1saof37xl3c4g.amplifyapp.com/)
+
 ## Features
 
 ### Core Functionality
