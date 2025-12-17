@@ -7,6 +7,7 @@ import SummaryPanel from './components/SummaryPanel'
 import NameInput from './components/NameInput'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
+import { submitFeedback, createFeedbackPayload } from './api/feedback'
 
 function App() {
   // State management for the feedback form
@@ -20,7 +21,7 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(false) // Toggles between light and dark theme
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault() // Prevent default form submission behavior
     setValidationError('') // Clear any previous validation errors
 
@@ -30,30 +31,43 @@ function App() {
       return
     }
 
-    // Create new submission object with all form data
-    const newSubmission = {
-      id: Date.now(), // Unique identifier using timestamp
-      name: name.trim(), // Remove whitespace from name
-      rating: selectedRating,
-      comment: comment.trim(), // Remove whitespace from comment
-      timestamp: new Date().toISOString() // ISO format timestamp for consistent date handling
-    }
-
-    // Add new submission to the submissions array
-    setSubmissions([...submissions, newSubmission])
-
-    // Show confirmation message and disable form for 3 seconds
-    setShowConfirmation(true)
     setIsSubmitting(true)
 
-    // Reset form after 3 seconds
-    setTimeout(() => {
+    try {
+      // Create feedback payload with current page URL and timestamp
+      const feedbackPayload = createFeedbackPayload(selectedRating, comment.trim())
+      
+      // Submit feedback to API
+      await submitFeedback(feedbackPayload)
+
+      // Create new submission object for local display
+      const newSubmission = {
+        id: Date.now(), // Unique identifier using timestamp
+        name: name.trim(), // Remove whitespace from name
+        rating: selectedRating,
+        comment: comment.trim(), // Remove whitespace from comment
+        timestamp: feedbackPayload.timestamp // Use same timestamp as API submission
+      }
+
+      // Add new submission to the submissions array
+      setSubmissions([...submissions, newSubmission])
+
+      // Show confirmation message
+      setShowConfirmation(true)
+
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setIsSubmitting(false)
+        setShowConfirmation(false)
+        setSelectedRating(null)
+        setComment('')
+        setName('')
+      }, 3000)
+    } catch (error) {
+      // Handle API submission error
+      setValidationError('Failed to submit feedback. Please try again.')
       setIsSubmitting(false)
-      setShowConfirmation(false)
-      setSelectedRating(null)
-      setComment('')
-      setName('')
-    }, 3000)
+    }
   }
 
   // Toggle between light and dark theme
