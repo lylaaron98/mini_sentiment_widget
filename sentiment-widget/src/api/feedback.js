@@ -13,6 +13,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://httpbin.org/p
  * @param {string} feedbackData.timestamp - ISO 8601 timestamp of submission
  * @returns {Promise<Object>} Response data from the API
  */
+// changes
 export async function submitFeedback(feedbackData) {
   try {
     const response = await fetch(API_BASE_URL, {
